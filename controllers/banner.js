@@ -14,6 +14,17 @@ const getBanners = async (req, res) => {
   }
 };
 
+
+const getservices = async () => {
+    const [rows] = await db.execute("SELECT * FROM services");
+    return res.status(200).json({
+      status: 0,
+      Message: "Success",
+      data: rows,
+    });
+}
+
 module.exports = {
   getBanners,
+  getservices,
 };

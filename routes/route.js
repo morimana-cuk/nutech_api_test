@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
-const { getBanners } = require("../controllers/banner");
+const { getBanners, getservices } = require("../controllers/banner");
 const { registeruser, login } = require("../controllers/auth/auth");
 const { verifytoken } = require("../middlewares/validation");
 const {
@@ -18,12 +18,11 @@ const {
 const multer = require("multer");
 const upload = multer({ dest: "img/upload" });
 
-
-
 router.get("/banners", getBanners);
-router.post("/register", registeruser);
+router.post("/registration", registeruser);
 router.post("/login", login);
 
+router.get("/services", verifytoken, getservices);
 router.get("/profile", verifytoken, getprofile);
 router.put("/profile/update", verifytoken, updateprofile);
 router.put(
