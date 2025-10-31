@@ -24,6 +24,7 @@ const getservices = async (req, res) => {
             data: rows,
         });
     } catch (error) {
+        console.log("Error fetching services:", error);
         console.error("Error fetching services:", error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
