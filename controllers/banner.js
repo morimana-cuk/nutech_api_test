@@ -15,14 +15,19 @@ const getBanners = async (req, res) => {
 };
 
 
-const getservices = async () => {
-    const [rows] = await db.execute("SELECT * FROM services");
-    return res.status(200).json({
-      status: 0,
-      Message: "Success",
-      data: rows,
-    });
-}
+const getservices = async (req, res) => {
+    try {
+        const [rows] = await db.execute("SELECT * FROM services");
+        return res.status(200).json({
+            status: 0,
+            Message: "Success",
+            data: rows,
+        });
+    } catch (error) {
+        console.error("Error fetching services:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 module.exports = {
   getBanners,
